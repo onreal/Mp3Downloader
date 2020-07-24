@@ -1,0 +1,40 @@
+<!-- templates/botadmin.html -->
+
+{% extends "template.html" %}
+
+{% block content %}
+<div id="log"> </div>
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Login</h3>
+    <div class="box">
+        <form method="POST" action="/loginRequest">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="Your Password">
+                </div>
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth">Login</button>
+        </form>
+    </div>
+</div>
+
+    <script type="text/javascript" charset="utf-8">
+        var socket = io();
+        socket.on('connect', function() {
+            socket.emit('message', {data: 'I\'m connected!'});
+        });
+        socket.on('connect', function() {
+            socket.emit('lesaz', {data: 'I\'m connected!'});
+        });
+        socket.on('roufa_minima', function(msg) {
+			console.log(msg);
+                $('#log').append('<br>' + $('<div/>').text('Received #'  + msg).html());
+        });
+    </script>
+{% endblock %}

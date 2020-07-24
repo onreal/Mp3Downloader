@@ -1,0 +1,92 @@
+<!-- templates/main.html -->
+
+{% extends "template.html" %}
+
+{% block content %}
+<div>
+
+        <form id="searchForm" name="searchForm">
+            <h3 class="title">Search youtube and download as mp3</h3>
+            <div class="columns">
+            <div class="column is-9">
+                <div class="field">
+                    <div class="control">
+                        <input autofocus="" class="input is-large" id="searchStr" name="searchStr"
+                                   placeholder="Search on youtube"
+                                   type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="column is-3">
+                <button class="button is-block is-info is-large is-fullwidth">Perform search...</button>
+            </div>
+            </div>
+        </form>
+
+    <div class="columns is-multiline" id="sresults" style="margin-top: 10px;"></div>
+</div>
+
+<!--<div class="column is-12">-->
+<!--    <h3 class="title">Provide youtube url and download as mp3</h3>-->
+<!--    <div class="">-->
+<!--        <form action="/convertMp3" method="POST">-->
+<!--            <div class="field" style="text-align: left">-->
+<!--                <span style="color: #a4a1a1">copy & paste youtube url</span>-->
+<!--                <div class="control">-->
+<!--                    <input autofocus="" class="input is-large" name="url" placeholder="Youtube Url ..." type="url">-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="field" style="text-align: left">-->
+<!--                <span style="color: #a4a1a1">output_file_name.mp3 (optional. default is the video name)</span>-->
+<!--                <div class="control">-->
+<!--                    <input class="input is-large" name="title" placeholder="Download File Title" type="text">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <button class="button is-block is-info is-large is-fullwidth">Download</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<script type="text/javascript">
+    $(function () {
+        $('#searchForm').bind('submit', function () {
+            let srchstr = $('#searchStr').val()
+
+            console.log(srchstr)
+
+            Sijax.request('search_results', [srchstr], {
+                data: {csrf_token: "{{ csrf_token() }}"},
+                success: function (response) {
+
+                    let theResponse = response[0]['call']
+                    console.log(theResponse)
+
+                    let html = []
+                    for (let i = 0; theResponse.length > i; i++) {
+
+                        let title = '<span>' + theResponse[i].vid_title + '</span>'
+                        let thumb = '<span><img width="100%" src="' + theResponse[i].vid_thumbnail + '" /></span>'
+
+                        let urlFormat = 'convertItemMp3?video_id=' + theResponse[i].vid_id
+                        let downloadUrl = ' >> <a href="' + urlFormat + '">download</a>'
+
+                        let detailsSec = '<div>' + title + '' + downloadUrl + '</div>'
+
+                        let templateToPush = '<div class="column is-3">' + thumb + detailsSec + '</div>'
+
+                        html.push(templateToPush)
+                    }
+
+                    $("#sresults").html(html);
+                }
+            });
+            //Prevent the form from being submitted
+            return false;
+        });
+
+        $('#searchStr').focus();
+    });
+</script>
+
+{% endblock %}
