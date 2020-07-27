@@ -77,7 +77,7 @@ venv/bin/python3.7 app/scripts/migrate_pgsql.py db upgrade
 PATH=$PATH
 APP_SETTINGS="config.DevelopmentConfig"
 PGSQL_CONNECTION_STRING="postgres://username:password@host:port/database"
-PYTHONPATH=/wproject/venv/lib/python3.7/site-packages
+PYTHONPATH=/venv/lib/python3.7/site-packages
 FLASK_APP=app/__init__.py
 ```
 
