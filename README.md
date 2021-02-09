@@ -74,7 +74,6 @@ FLASK_APP=app/__init__.py
 ```
 
 ## TODO
-    - Make async the website in order to not lock when you request for a song conversion - Need Help Here
     - Code optimisations on varius places
     - Bot Admin Front-End
     - Broadcaster to get messages from PostgresSQL
