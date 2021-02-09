@@ -2,14 +2,6 @@
 
 Mp3Downloader is a Python Flask App for converting youtube videos to mp3. Also have an integrated telegram bot in order to download music directly on any device, also the bot support inline search for rapid results.
 
-![Login Screen](https://user-images.githubusercontent.com/57252905/88567807-ad2b4580-d040-11ea-8f6f-9a99d138a9eb.png)
-
-![Download Screen](https://user-images.githubusercontent.com/57252905/88567812-aef50900-d040-11ea-8dd5-a692d7817362.png)
-
-![Search Screen](https://user-images.githubusercontent.com/57252905/88567829-b4eaea00-d040-11ea-804a-319d679c9463.png)
-
-![Bot Screen](https://user-images.githubusercontent.com/57252905/88567833-b61c1700-d040-11ea-9eae-6ca3a3c22e41.png)
-
 ## Demo
 
 There is currently an active Telegram Bot where you can try this project. Just search for [Mp3Father](https://t.me/EasyMp3Bot)
